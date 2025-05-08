@@ -1,0 +1,25 @@
+:root {
+    /* Border */
+    --figpress-border: var(--figma-color-border);
+    --figpress-border-strong: var(--figma-color-border-strong);
+    --figpress-border-selected: var(--figma-color-border-selected);
+    --figpress-border-danger-strong: var(--figma-color-border-danger-strong);
+
+    /* Background */
+    --figpress-bg: var(--figma-color-bg);
+    --figpress-bg-secondary: var(--figma-color-bg-secondary);
+
+    /* Text */
+    --figpress-text: var(--figma-color-text);
+    --figpress-text-secondary: var(--figma-color-text-secondary);
+    --figpress-text-tertiary: var(--figma-color-text-tertiary);
+
+    --figpress-text-disabled: var(--figma-color-text-disabled);
+    --figpress-text-onbrand: var(--figma-color-text-onbrand);
+    
+    --figpress-text-brand: var(--figma-color-text-brand);
+    --figpress-text-brand-rgb: 0, 122, 255; /* RGB values for blue, adjust if needed */
+    --figpress-text-danger: var(--figma-color-text-danger);
+    --figpress-text-warning: var(--figma-color-text-warning);
+    --figpress-text-success: var(--figma-color-text-success);
+}
