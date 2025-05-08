@@ -39,6 +39,12 @@ function App() {
   const [wpData, setWpData] = useState<WordPressData[]>([]);
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const [layerMappings, setLayerMappings] = useState<Record<string, string>>({});
+  
+  // Add state for duplication options
+  const [duplicateTemplate, setDuplicateTemplate] = useState<boolean>(false);
+  const [templateSpacing, setTemplateSpacing] = useState<number>(50);
+  const [gridLayout, setGridLayout] = useState<boolean>(false);
+  const [gridColumns, setGridColumns] = useState<number>(2);
 
   // Listen for messages from the plugin code
   React.useEffect(() => {
@@ -97,6 +103,14 @@ function App() {
     // Save the mappings for later use
     setLayerMappings(mappings);
     
+    // Save duplication options if provided
+    if (duplicationOptions) {
+      setDuplicateTemplate(duplicationOptions.duplicateTemplate);
+      setTemplateSpacing(duplicationOptions.templateSpacing);
+      setGridLayout(duplicationOptions.gridLayout);
+      setGridColumns(duplicationOptions.gridColumns);
+    }
+    
     // Notify plugin about data fetching
     parent.postMessage({
       pluginMessage: {
@@ -124,7 +138,12 @@ function App() {
         type: 'populate-layers',
         data: selectedData,
         layerMappings, // Use the saved mappings
-        selectedItems
+        selectedItems,
+        // Add duplication options
+        duplicateTemplate,
+        templateSpacing,
+        gridLayout,
+        gridColumns
       }
     }, '*');
     
@@ -181,15 +200,18 @@ function App() {
         />
         
         {status && (
-          <div className="status-message">
-            {status}
+          <div className="section-container">
+            <div className="status-message">
+              {status}
+            </div>
           </div>
         )}
         
         {wpData.length > 0 && (
-          <div className="data-preview-container">
-            <div className="data-preview-header">
-              <h3>Fetched {wpData.length} items</h3>
+          <div className="section-container">
+            <div className="data-preview-container">
+              <div className="data-preview-header">
+                <h3>Fetched {wpData.length} items</h3>
               <div className="data-actions">
                 <button 
                   className="small-button" 
@@ -243,6 +265,7 @@ function App() {
               </div>
             </div>
           </div>
+        </div>
         )}
       </main>
       <Footer />
